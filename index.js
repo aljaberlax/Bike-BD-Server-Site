@@ -26,7 +26,14 @@ client.connect(err => {
         const products = await cursor.toArray();
         res.send(products)
     });
-    
+    app.get('/product/:id',async(req,res)=>{
+        const id =req.params.id;
+        
+        const quary={_id:ObjectId(id)}
+        const products=await productCollection.findOne(quary);
+        res.send(products);
+
+    });
     //post 
 
     app.post('/product', async (req, res) => {
