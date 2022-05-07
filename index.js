@@ -34,6 +34,9 @@ client.connect(err => {
         res.send(products);
 
     });
+    //My items collection API
+
+   
     //post 
 
     app.post('/product', async (req, res) => {
