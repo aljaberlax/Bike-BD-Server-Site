@@ -42,7 +42,7 @@ client.connect(err => {
         res.send(result)
     })
     
-    console.log('connected to bike db')
+    
 });
 
 
