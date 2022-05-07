@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 
-const uri = "mongodb+srv://DB_bikeBd_user:TujpQ3lICRFRqa2O@cluster0.xrerq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = `mongodb+srv://DB_bikeBd_user:TujpQ3lICRFRqa2O@cluster0.xrerq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
     
@@ -40,6 +40,29 @@ client.connect(err => {
         const newProduct = req.body;
         const result = await productCollection.insertOne(newProduct)
         res.send(result)
+    })
+    //delete
+    app.delete('/product/:id', async (req, res) => {
+        const id = req.params.id;
+        const quary = { _id: ObjectId(id) }
+        const result = await productCollection.deleteOne(quary);
+        res.send(result);
+    });
+    // update quantity
+    app.put('/product/:id', async(req, res) =>{
+        const id = req.params.id;
+        const updatequantity = req.body;
+        const filter = {_id: ObjectId(id)};
+        const options = { upsert: true };
+        const updatedDoc = {
+            $set: {
+                quantity: updatequantity.quantity
+               
+            },
+        };
+        const result = await productCollection.updateOne(filter, updatedDoc, options);
+        res.send(result);
+
     })
     
     console.log('connected to bike db')
