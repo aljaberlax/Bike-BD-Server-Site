@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 
-const uri = `mongodb+srv://DB_bikeBd_user:TujpQ3lICRFRqa2O@cluster0.xrerq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.PASS}@cluster0.xrerq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
     
