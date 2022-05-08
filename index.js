@@ -34,7 +34,7 @@ client.connect(err => {
         res.send(products);
 
     });
-    //My items collection API
+    //My items collection
 
    
     //post 
